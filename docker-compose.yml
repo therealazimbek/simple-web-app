@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - jenkins-sonar-network
+
+  sonarqube:
+    image: sonarqube:latest
+    ports:
+      - "9000:9000"
+    networks:
+      - jenkins-sonar-network
+
+  tomcat:
+    image: tomcat:latest
+    ports:
+      - "8081:8080"
+    networks:
+      - jenkins-sonar-network
+
+  maven:
+    image: maven:latest
+    networks:
+      - jenkins-sonar-network
+
+networks:
+  jenkins-sonar-network:
+
+volumes:
+  jenkins_home:

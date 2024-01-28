@@ -4,19 +4,25 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'mvn test'
+                withMaven(maven: 'maven') {
+                    sh 'mvn test'
+                }
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                withMaven(maven: 'maven') {
+                    sh 'mvn clean install'
+                }
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
-              sh "mvn clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=adm1n -Dsonar.projectKey=demo -Dsonar.projectName='demo'"
+                withMaven(maven: 'maven') {
+                    sh "mvn clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=adm1n -Dsonar.projectKey=demo -Dsonar.projectName='demo'"
+                }
             }
          }
     }
