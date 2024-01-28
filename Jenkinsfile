@@ -16,7 +16,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-              sh "mvn clean verify sonar:sonar -Dsonar.projectKey=demo -Dsonar.projectName='demo'"
+              sh "mvn clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=adm1n -Dsonar.projectKey=demo -Dsonar.projectName='demo'"
             }
          }
     }
