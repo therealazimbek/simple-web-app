@@ -21,7 +21,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withMaven(maven: 'maven') {
-                    sh "mvn clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=adm1n -Dsonar.projectKey=demo -Dsonar.projectName='demo'"
+                    sh "mvn clean verify sonar:sonar -Dsonar.token=sqp_cb7abc0561f8a50c39ee815a045f305a46b2ad8a -Dsonar.projectKey=demo -Dsonar.projectName='demo'"
                 }
             }
          }
