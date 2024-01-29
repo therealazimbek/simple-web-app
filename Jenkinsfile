@@ -28,7 +28,7 @@ pipeline {
 
         stage('Deploy to Tomcat') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: '428bc5a1-e411-4f20-aa19-da5afdfb78a8', path: '/manager', url: 'http://localhost:8000')], contextPath: null, onFailure: false, war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'e9e7d70f-9fe8-4062-bf2c-811026633c72', path: '', url: 'http://localhost:8000')], contextPath: 'TomcatMavenApp', onFailure: false, war: '**/*.war'
             }
         }
     }
