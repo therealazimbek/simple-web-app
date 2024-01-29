@@ -4,17 +4,13 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                withMaven(maven: 'maven') {
-                    sh 'mvn test'
-                }
+                sh 'mvn test'
             }
         }
 
         stage('Build') {
             steps {
-                withMaven(maven: 'maven') {
-                    sh 'mvn clean install'
-                }
+                sh 'mvn clean install'
             }
         }
 
