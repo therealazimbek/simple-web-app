@@ -20,5 +20,10 @@ pipeline {
             }
          }
 
+        stage('Archive the artifacts') {
+            steps {
+                archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.jar', fingerprint: true, followSymlinks: false, onlyIfSuccessful: true
+            }
+        }
     }
 }
