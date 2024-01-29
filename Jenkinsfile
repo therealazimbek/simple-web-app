@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        TOMCAT_HOME = "/opt/tomcat"
-        WAR_FILE = "simple-web-app-0.0.1-SNAPSHOT.war"
-        DEPLOY_DIR = "${TOMCAT_HOME}/webapps"
-    }
-
     stages {
         stage('Test') {
             steps {
@@ -34,14 +28,7 @@ pipeline {
 
         stage('Deploy to Tomcat') {
             steps {
-                script {
-                    // Copy the archived WAR file to the Tomcat webapps directory
-                    def buildInfo = currentBuild.getRawBuild()
-                    def warFile = findFiles(glob: 'target/*.war')[0]
-                    def targetWarFile = "${buildInfo.artifactsDir}/${warFile}"
-
-                    sh "cp ${targetWarFile} ${DEPLOY_DIR}/${WAR_FILE}"
-                }
+                deploy adapters: [tomcat9(path: '', url: 'http://localhost:8000/')], contextPath: '/webapps', onFailure: false, war: '**/*.war'
             }
         }
     }
